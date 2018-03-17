@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="https://kingsword09.github.io">
   <title>学习JS高级程序设计 --- HTML中使用JavaScript要点 | 扬帆起航</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="要点一: &amp;lt;script&amp;gt;元素1. async(异步)     只适用于外部脚本文件   异步加载，目的是不让页面等待脚本下载和执行，同时异步加载页面其他内容   不要在页面加载期间修改DOM   异步脚本会在页面的load事件之前执行，但不确定在DOMContentLoaded前后执行(建议只使用一个异步脚本)     使用示例:&amp;lt;scirpt type=&amp;quot;text/">
+  <meta name="description" content="要点一: &amp;lt;script&amp;gt;元素1. async(异步)     只适用于外部脚本文件   异步加载，目的是不让页面等待脚本下载和执行，同时异步加载页面其他内容   不要在页面加载期间修改DOM   异步脚本会在页面的load事件之前执行，但不确定在DOMContentLoaded前后执行(建议只使用一个异步脚本)     使用示例:&amp;lt;scirpt type=&amp;quot;text">
 <meta name="keywords" content="JavaScript高级程序设计学习笔记,JavaScript,读书笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="学习JS高级程序设计 --- HTML中使用JavaScript要点">
 <meta property="og:url" content="https://kingsword09.github.io/2018/03/17/学习JS高级程序设计-HTML中使用JavaScript要点/index.html">
 <meta property="og:site_name" content="扬帆起航">
-<meta property="og:description" content="要点一: &amp;lt;script&amp;gt;元素1. async(异步)     只适用于外部脚本文件   异步加载，目的是不让页面等待脚本下载和执行，同时异步加载页面其他内容   不要在页面加载期间修改DOM   异步脚本会在页面的load事件之前执行，但不确定在DOMContentLoaded前后执行(建议只使用一个异步脚本)     使用示例:&amp;lt;scirpt type=&amp;quot;text/">
-<meta property="og:updated_time" content="2018-03-17T05:44:57.635Z">
+<meta property="og:description" content="要点一: &amp;lt;script&amp;gt;元素1. async(异步)     只适用于外部脚本文件   异步加载，目的是不让页面等待脚本下载和执行，同时异步加载页面其他内容   不要在页面加载期间修改DOM   异步脚本会在页面的load事件之前执行，但不确定在DOMContentLoaded前后执行(建议只使用一个异步脚本)     使用示例:&amp;lt;scirpt type=&amp;quot;text">
+<meta property="og:updated_time" content="2018-03-17T09:25:53.285Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习JS高级程序设计 --- HTML中使用JavaScript要点">
-<meta name="twitter:description" content="要点一: &amp;lt;script&amp;gt;元素1. async(异步)     只适用于外部脚本文件   异步加载，目的是不让页面等待脚本下载和执行，同时异步加载页面其他内容   不要在页面加载期间修改DOM   异步脚本会在页面的load事件之前执行，但不确定在DOMContentLoaded前后执行(建议只使用一个异步脚本)     使用示例:&amp;lt;scirpt type=&amp;quot;text/">
+<meta name="twitter:description" content="要点一: &amp;lt;script&amp;gt;元素1. async(异步)     只适用于外部脚本文件   异步加载，目的是不让页面等待脚本下载和执行，同时异步加载页面其他内容   不要在页面加载期间修改DOM   异步脚本会在页面的load事件之前执行，但不确定在DOMContentLoaded前后执行(建议只使用一个异步脚本)     使用示例:&amp;lt;scirpt type=&amp;quot;text">
   
     <link rel="alternative" href="/atom.xml" title="扬帆起航" type="application/atom+xml">
   
@@ -170,7 +170,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="要点一-lt-script-gt-元素"><a href="#要点一-lt-script-gt-元素" class="headerlink" title="要点一: &lt;script&gt;元素"></a>要点一: <code>&lt;script&gt;</code>元素</h4><p><strong>1. async</strong>(异步)  </p>
+        <hr>
+<h4 id="要点一-lt-script-gt-元素"><a href="#要点一-lt-script-gt-元素" class="headerlink" title="要点一: &lt;script&gt;元素"></a>要点一: <code>&lt;script&gt;</code>元素</h4><p><strong>1. async</strong>(异步)  </p>
 <blockquote>
 <ul>
 <li>只适用于外部脚本文件  </li>
@@ -206,6 +207,7 @@
 </ul>
 </blockquote>
 <h5 id="使用示例-3"><a href="#使用示例-3" class="headerlink" title="使用示例:"></a>使用示例:</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    (function() &#123;</span></span><br><span class="line"><span class="undefined">      alert('这是一个示例！');</span></span><br><span class="line"><span class="undefined">    &#125;)();</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
 <h4 id="要点二-lt-script-gt-标签位置"><a href="#要点二-lt-script-gt-标签位置" class="headerlink" title="要点二: &lt;script&gt;标签位置"></a>要点二: <code>&lt;script&gt;</code>标签位置</h4><p>1.在<code>&lt;head&gt;</code>元素中  </p>
 <blockquote>
 <ul>
@@ -222,6 +224,7 @@
 </ul>
 </blockquote>
 <h5 id="使用示例-5"><a href="#使用示例-5" class="headerlink" title="使用示例:"></a>使用示例:</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>示例<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"./example.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
 <h4 id="要点三-lt-noscript-gt-元素"><a href="#要点三-lt-noscript-gt-元素" class="headerlink" title="要点三: &lt;noscript&gt;元素"></a>要点三: <code>&lt;noscript&gt;</code>元素</h4><p>1.主要用于早期浏览器不支持JavaScript时，让页面平稳退化<br>2.在以下情况中会显示<code>&lt;noscript&gt;</code>中的内容  </p>
 <blockquote>
 <ul>
