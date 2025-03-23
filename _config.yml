@@ -1,0 +1,94 @@
+site: Blog
+title: kingsword09
+greetings: Hello there! 👋
+aboutme: https://github.com/kingsword09
+description: >-
+  Kingsword09's Personal Blog
+lang: zh-CN
+timezone: Asia/Hong_Kong
+repo: https://github.com/kingsword09/kingsword09.github.io # site repo [optional]
+data-theme: dark # default theme "dark" | "light"
+comments-enabled: true # true to enable disqus comments, false to hide them
+
+author:
+  name: kingsword09
+  bio: personal blog
+  userpicture: https://github.com/kingsword09.png
+  username: kingsword09 # general username
+  github: kingsword09 # github username
+  twitter: kingsword09 # twitter username
+  email: kingsword09@gmail.com # email adress
+
+# Font Settings
+googlewebfonts: family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800
+
+# URL settings
+url: "https://kingsword09.github.io" # Domain Name of host. [username].github.io for github pages
+baseurl: "" # sub folder for jekyll site. only if jekyll site not in root of host. leave blank if not wishd. always add / in front.
+permalink: pretty
+
+# local
+# url: "http://localhost:4000" # 
+# baseurl: "" # 
+
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+
+exclude:
+  - .jekyll-cache
+  - .obsidian
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE.md
+  - README.md
+  - CONTRIBUTING.md
+  
+compress_html:
+  clippings: all
+  comments: ["<!-- ", " -->"]
+
+sass:
+  sass_dir: _sass
+  style: compressed
+
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-relative-links
+
+collections:
+  pages:
+    output: true
+    permalink: /:name
+  posts:
+    output: true
+    permalink: /:year/:month/:day/:slug
+  
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: "default"
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+relative_links:
+  enabled:     true
+  collections: false
+
+
