@@ -27,13 +27,17 @@ class Options {
   var isPrivacyDialogRequired: Boolean = true
 }
 ```
+
 按照这种方式定义之后，如果在调用这个插件的时候，`isPrivacyDialogRequired` 设置为 `false`，在 `Android` 的结果依然会是：`true`。
 
-这个问题在 `[阿里巴巴Java开发手册](https://github.com/alibaba/p3c)` 中有提到：[【强制】POJO类中布尔类型的变量，都不要加is前缀，否则部分框架解析会引起序列化错误。](https://github.com/alibaba/p3c/blob/6c59c8c36ecd8722c712d5685b8c3822c1c8b030/p3c-gitbook/%E7%BC%96%E7%A8%8B%E8%A7%84%E7%BA%A6/%E5%91%BD%E5%90%8D%E9%A3%8E%E6%A0%BC.md?plain=1#L22)
+这个问题在 `[阿里巴巴Java开发手册](https://github.com/alibaba/p3c)` 中有提到：[【强制】POJO 类中布尔类型的变量，都不要加 is 前缀，否则部分框架解析会引起序列化错误。](https://github.com/alibaba/p3c/blob/6c59c8c36ecd8722c712d5685b8c3822c1c8b030/p3c-gitbook/%E7%BC%96%E7%A8%8B%E8%A7%84%E7%BA%A6/%E5%91%BD%E5%90%8D%E9%A3%8E%E6%A0%BC.md?plain=1#L22)
 
 而 `Tauri 2.0` 默认使用的序列化框架 [jackson](https://github.com/FasterXML/jackson) 就会出现这个问题。两种方式解决这个问题：
+
 1. 不使用 `is` 开头的属性来定义布尔类型变量；
 2. 则是使用 `JsonProperty` 注解：
+
+{: data-line="1,7"}
 
 ```kotlin
 import com.fasterxml.jackson.annotation.JsonProperty
@@ -46,7 +50,6 @@ class Options {
   var isPrivacyDialogRequired: Boolean = true
 }
 ```
-{: data-line="1,7"}
 
 通过这样修改之后，就可以正常处理反序列化了。
 
@@ -56,4 +59,4 @@ class Options {
 
 - [Tauri 官方文档](https://v2.tauri.app/)
 - [Jackson 官方文档](https://github.com/FasterXML/jackson)
-- [阿里巴巴Java开发手册](https://github.com/alibaba/p3c)
+- [阿里巴巴 Java 开发手册](https://github.com/alibaba/p3c)
