@@ -1,0 +1,26 @@
+---
+layout: null
+---
+
+# {{ site.title }}
+
+> {{ site.description }}
+
+{% assign all_tags = "" | split: "," %}
+{% for post in site.posts %}
+  {% assign all_tags = all_tags | concat: post.tags %}
+{% endfor %}
+{% assign unique_tags = all_tags | uniq | sort %}
+
+## Blog
+
+{% for post in site.posts %}
+- [{{ post.title }}]({{ site.url }}{{ site.baseurl }}{{ post.url }}): {{ post.summary }}
+{% endfor %}
+
+## Reference
+
+- [aboutme]({{ site.aboutme }}): {{ site.author.name }}
+{% for tag in unique_tags %}
+- [{{ tag }}]({{ site.url }}{{ site.baseurl }}/tag/{{ tag }}): {{ tag }}
+{% endfor %}
