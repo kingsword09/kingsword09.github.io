@@ -10,6 +10,10 @@ repo: https://github.com/kingsword09/kingsword09.github.io # site repo [optional
 data-theme: dark # default theme "dark" | "light"
 comments-enabled: true # true to enable disqus comments, false to hide them
 
+# Chrome Origin Trial token for AI Prompt API (site-wide)
+chat: true
+chrome_origin_trial_token: "AxrdRhGha6dNDghmUqJpOG5KduqZq0dFrp5yRcutglbiG+n5YsflRI/QqyBqH+YHw7eXfEO/rJFdX603YoC50A4AAACOeyJvcmlnaW4iOiJodHRwczovL2Jsb2cua2luZ3N3b3JkLnRlY2g6NDQzIiwiZmVhdHVyZSI6IkFJUHJvbXB0QVBJTXVsdGltb2RhbElucHV0IiwiZXhwaXJ5IjoxNzc0MzEwNDAwLCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="
+
 author:
   name: kingsword09
   bio: personal blog

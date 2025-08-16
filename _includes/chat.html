@@ -1,0 +1,38 @@
+<div class="chat-widget">
+  <button class="chat-fab" id="chatFab" aria-label="打开AI助手">AI</button>
+
+  <div class="chat-container" role="dialog" aria-modal="false" aria-labelledby="chatTitle" aria-hidden="true">
+    <div class="chat-header">
+      <div class="status-indicator" id="statusIndicator"></div>
+      <h1 id="chatTitle">博客AI问答助手</h1>
+      <p>基于Chrome内置AI，为您解答博客相关问题</p>
+      <button class="chat-close-btn" id="chatCloseBtn" aria-label="关闭AI助手"></button>
+    </div>
+
+    <div class="chat-messages" id="chatMessages">
+      <div class="welcome-message">
+        👋 欢迎使用博客AI助手！请输入您的问题，我会尽力为您解答。
+      </div>
+    </div>
+
+    <div class="chat-input-container">
+      <div class="chat-input-wrapper">
+        <textarea
+          class="chat-input"
+          id="chatInput"
+          placeholder="请输入您的问题... (Shift+Enter 换行)"
+          rows="1"
+        ></textarea>
+        <button class="send-button" id="sendButton" aria-label="发送">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22,2 15,22 11,13 2,9"></polygon>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Resize handle -->
+    <div class="chat-resize-handle" aria-hidden="true"></div>
+  </div>
+</div>
