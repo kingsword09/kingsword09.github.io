@@ -18,6 +18,9 @@ layout: compress
 <body>
   <main>
    {% include anchor_headings.html html=content anchorBody="#" %}
+   {% if site.chat or page.chat or page.layout == 'post' or page.layout == 'page' %}
+     {% include chat.html %}
+   {% endif %}
   </main>
 
   
@@ -54,11 +57,11 @@ layout: compress
     }
   </script>
   <script src="{{ site.url }}{{ site.baseurl }}/assets/js/prism.js"></script>
+  {% if site.chat or page.chat or page.layout == 'post' or page.layout == 'page' %}
+  <script src="{{ site.url }}{{ site.baseurl }}/assets/js/chat.js"></script>
+  {% endif %}
 
-
-</body>
-
-<footer class="social-footer">
+  <footer class="social-footer">
   <div class="social-footer-icons">
     {% if site.author.github %}
     <a href="https://github.com/{{ site.author.github }}" title="Github profile" target="_blank"
@@ -81,23 +84,23 @@ layout: compress
     <a href="https://github.com/kingsword09/kingsword09.github.io" title="Browse the code" target="_blank" rel="noopener noreferrer"><i
         class="fa-solid fa-code" aria-hidden="true"></i></a>
   </div>
-</footer>
+  </footer>
 
-
-{% if page.url == '/' %}
-  <script src="{{ site.url }}{{ site.baseurl }}/assets/js/simple-jekyll-search.js"></script>
-  <script>
-    var sjs = SimpleJekyllSearch({
-      searchInput: document.getElementById('search-input'),
-      resultsContainer: document.getElementById('search-results'),
-		      json: '{{ site.url }}{{ site.baseurl }}/search.json',
-      searchResultTemplate: '<li><a href="{url}" title="{description}">{title}</a></li>',
-      noResultsText: 'No results found..',
-      limit: 10,
-      fuzzy: true,
-    })
-  </script>
+  {% if page.url == '/' %}
+    <script src="{{ site.url }}{{ site.baseurl }}/assets/js/simple-jekyll-search.js"></script>
+    <script>
+      var sjs = SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '{{ site.url }}{{ site.baseurl }}/search.json',
+        searchResultTemplate: '<li><a href="{url}" title="{description}">{title}</a></li>',
+        noResultsText: 'No results found..',
+        limit: 10,
+        fuzzy: true,
+      })
+    </script>
   {% endif %}
 
+</body>
 
 </html>
