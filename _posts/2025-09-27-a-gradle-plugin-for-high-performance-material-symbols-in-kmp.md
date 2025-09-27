@@ -3,7 +3,7 @@ layout: post
 title: Kotlin Multiplatform 项目的高性能 Material Symbols 生成插件
 description: 按需生成与智能缓存的 Material Symbols Gradle 插件 —— 让图标包体积缩减 99%+，并行下载、增量构建、可复现输出，完美适配 Compose Multiplatform。
 summary: 本文详细介绍了如何使用 SymbolCraft 插件来自动下载和缓存 Material Symbols SVG，并自动转化为 Composable 组件，从而在 KMP 项目中实现高性能、小体积的图标管理方案。
-tags: coding
+tags: coding kmp
 minute: 8
 ---
 
