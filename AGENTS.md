@@ -50,6 +50,8 @@ Typical flow:
 - Commit your new/edited post(s)
 - Push to `main` (or open a PR, then merge)
 
+If you still see a `pages-build-deployment` workflow running Jekyll, go to GitHub repo Settings → Pages → Source and switch to **GitHub Actions**.
+
 ## Site URL (custom domain)
 
 The site URL is used to generate canonical URLs, feeds, and sitemap entries.

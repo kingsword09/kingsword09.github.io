@@ -30,7 +30,7 @@ echo 'GITHUB_TOKEN=ghp_xxx' >> .env
 If `bun install` hangs at `Resolving dependencies`, try temporarily disabling proxy env vars:
 
 ```bash
-unset http_proxy https_proxy HTTP_PROXY HTTPS_PROXY
+bun install --no-cache
 ```
 
 ## Scripts
