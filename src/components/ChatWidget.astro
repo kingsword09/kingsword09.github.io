@@ -1,18 +1,51 @@
 <div class="chat-widget">
-  <button class="chat-fab" id="chatFab" aria-label="打开AI助手">AI</button>
+  <button
+    class="chat-fab"
+    id="chatFab"
+    type="button"
+    aria-label="打开AI助手"
+    aria-controls="chatPanel"
+    aria-expanded="false"
+  >
+    AI
+  </button>
 
   <div
     class="chat-container"
+    id="chatPanel"
     role="dialog"
     aria-modal="false"
     aria-labelledby="chatTitle"
     aria-hidden="true"
   >
     <div class="chat-header">
-      <div class="status-indicator" id="statusIndicator"></div>
-      <h1 id="chatTitle">博客AI问答助手</h1>
-      <p>基于Chrome内置AI，为您解答博客相关问题</p>
-      <button class="chat-close-btn" id="chatCloseBtn" aria-label="关闭AI助手"></button>
+      <button
+        class="chat-close-btn"
+        id="chatCloseBtn"
+        type="button"
+        aria-label="关闭AI助手"
+      >
+        <svg
+          aria-hidden="true"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        >
+          <path d="M18 6L6 18"></path>
+          <path d="M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <div class="chat-title">
+        <h2 id="chatTitle">博客AI问答助手</h2>
+        <p>基于Chrome内置AI，为您解答博客相关问题</p>
+      </div>
+
+      <div class="status-indicator" id="statusIndicator" title="AI 状态"></div>
     </div>
 
     <div class="chat-messages" id="chatMessages">
@@ -25,9 +58,10 @@
           class="chat-input"
           id="chatInput"
           placeholder="请输入您的问题... (Shift+Enter 换行)"
+          aria-label="输入消息"
           rows="1"
         ></textarea>
-        <button class="send-button" id="sendButton" aria-label="发送">
+        <button class="send-button" id="sendButton" type="button" aria-label="发送">
           <svg
             width="20"
             height="20"
@@ -44,7 +78,6 @@
     </div>
 
     <!-- Resize handle -->
-    <div class="chat-resize-handle" aria-hidden="true"></div>
+    <div class="chat-resize-handle" aria-hidden="true" data-resize-from="right-bottom"></div>
   </div>
 </div>
-

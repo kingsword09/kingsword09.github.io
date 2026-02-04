@@ -139,7 +139,7 @@ async function highlightCodeBlocks(root: Element): Promise<void> {
   }
 }
 
-type ResizeFrom = "left-bottom";
+type ResizeFrom = "left-bottom" | "right-bottom";
 
 interface ResizeState {
   startX: number;
@@ -573,12 +573,15 @@ class ChatApp {
     switch (status) {
       case "ready":
         indicator.style.background = "#4ade80";
+        indicator.title = "AI 就绪";
         break;
       case "error":
         indicator.style.background = "#ef4444";
+        indicator.title = "AI 不可用";
         break;
       case "loading":
         indicator.style.background = "#ffa64d";
+        indicator.title = "AI 加载中";
         break;
     }
   }
@@ -592,6 +595,8 @@ class ChatApp {
   private openWidget() {
     this.chatWidget.classList.add("open");
     this.container.setAttribute("aria-hidden", "false");
+    this.chatFab.setAttribute("aria-expanded", "true");
+    this.chatFab.setAttribute("tabindex", "-1");
 
     // Ensure saved size is applied when opening
     this.applySavedSize();
@@ -611,6 +616,9 @@ class ChatApp {
   private closeWidget() {
     this.chatWidget.classList.remove("open");
     this.container.setAttribute("aria-hidden", "true");
+    this.chatFab.setAttribute("aria-expanded", "false");
+    this.chatFab.removeAttribute("tabindex");
+    this.chatFab.focus();
   }
 
   private applySavedSize() {
@@ -634,12 +642,16 @@ class ChatApp {
       : (e as MouseEvent);
 
     const rect = this.container.getBoundingClientRect();
+    const from =
+      (this.resizeHandle?.dataset.resizeFrom as ResizeFrom | undefined) ??
+      "right-bottom";
+
     this.resizeState = {
       startX: point.clientX,
       startY: point.clientY,
       startW: rect.width,
       startH: rect.height,
-      from: "left-bottom",
+      from,
     };
   }
 
