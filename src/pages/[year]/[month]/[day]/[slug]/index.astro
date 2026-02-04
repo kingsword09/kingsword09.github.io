@@ -22,8 +22,8 @@ const current = posts.find((p) => p.slug === Astro.props.slug);
 if (!current) throw new Error(`Post not found: ${Astro.props.slug}`);
 
 const index = posts.findIndex((p) => p.slug === current.slug);
-const previous = index > 0 ? posts[index - 1] : null; // newer (because list is newest-first)
-const next = index < posts.length - 1 ? posts[index + 1] : null; // older
+const previous = index < posts.length - 1 ? posts[index + 1] : null; // older (previous post by date)
+const next = index > 0 ? posts[index - 1] : null; // newer (next post by date)
 
 const { Content } = await current.render();
 ---
