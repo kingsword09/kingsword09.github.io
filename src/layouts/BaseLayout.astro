@@ -7,11 +7,6 @@ import SocialFooter from "../components/SocialFooter.astro";
 import ChatWidget from "../components/ChatWidget.astro";
 import { withBase } from "../utils/urls";
 
-import themeScriptUrl from "../scripts/theme.ts?url";
-import searchScriptUrl from "../scripts/search.ts?url";
-import chatScriptUrl from "../scripts/chat.ts?url";
-import codeScriptUrl from "../scripts/code.ts?url";
-
 type Props = {
   title?: string;
   description?: string;
@@ -35,20 +30,23 @@ const canonicalUrl = new URL(Astro.url.pathname, site.url).toString();
 
     <!-- Prevent theme flash: apply stored/preferred theme before styles render -->
     <script is:inline>
-      {`(function () {
-  try {
-    var stored = localStorage.getItem("theme");
-    if (stored === "dark" || stored === "light") {
-      document.documentElement.setAttribute("data-theme", stored);
-      return;
-    }
-    if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      document.documentElement.setAttribute("data-theme", "dark");
-    } else {
-      document.documentElement.setAttribute("data-theme", "light");
-    }
-  } catch (_) {}
-})();`}
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme");
+          if (stored === "dark" || stored === "light") {
+            document.documentElement.setAttribute("data-theme", stored);
+            return;
+          }
+          if (
+            window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches
+          ) {
+            document.documentElement.setAttribute("data-theme", "dark");
+          } else {
+            document.documentElement.setAttribute("data-theme", "light");
+          }
+        } catch (_) {}
+      })();
     </script>
 
     {site.chromeOriginTrialToken ? (
@@ -94,13 +92,18 @@ const canonicalUrl = new URL(Astro.url.pathname, site.url).toString();
 
     {site.gaMeasurementId ? (
       <>
-        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${site.gaMeasurementId}`}></script>
-        <script is:inline>
-          {`window.dataLayer = window.dataLayer || [];
+        <script
+          is:inline
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${site.gaMeasurementId}`}
+        ></script>
+        <script
+          is:inline
+          set:html={`window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', '${site.gaMeasurementId}');`}
-        </script>
+        ></script>
       </>
     ) : null}
 
@@ -114,9 +117,8 @@ gtag('config', '${site.gaMeasurementId}');`}
     {site.chatEnabled ? <ChatWidget /> : null}
     <SocialFooter />
 
-    <script is:inline type="module" src={themeScriptUrl}></script>
-    <script is:inline type="module" src={searchScriptUrl}></script>
-    <script is:inline type="module" src={codeScriptUrl}></script>
-    {site.chatEnabled ? <script is:inline type="module" src={chatScriptUrl}></script> : null}
+    <script>
+      import "../scripts/boot.ts";
+    </script>
   </body>
 </html>

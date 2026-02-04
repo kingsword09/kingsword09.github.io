@@ -61,14 +61,17 @@ const posts = sortPostsDesc(await getCollection("posts"));
   </section>
 
   {/* Inline search index: avoids extra network request and keeps search fast. */}
-  <script is:inline type="application/json" id="search-index">
-    {JSON.stringify(
+  <script
+    is:inline
+    type="application/json"
+    id="search-index"
+    set:html={JSON.stringify(
       posts.map((post) => ({
         title: post.data.title,
         description: post.data.description ?? "",
         tags: post.data.tags,
         url: getPostUrl(post),
       }))
-    )}
-  </script>
+    ).replace(/</g, "\\u003c")}
+  ></script>
 </BaseLayout>
