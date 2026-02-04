@@ -10,6 +10,7 @@ import { withBase } from "../utils/urls";
 import themeScriptUrl from "../scripts/theme.ts?url";
 import searchScriptUrl from "../scripts/search.ts?url";
 import chatScriptUrl from "../scripts/chat.ts?url";
+import codeScriptUrl from "../scripts/code.ts?url";
 
 type Props = {
   title?: string;
@@ -115,6 +116,7 @@ gtag('config', '${site.gaMeasurementId}');`}
 
     <script is:inline type="module" src={themeScriptUrl}></script>
     <script is:inline type="module" src={searchScriptUrl}></script>
+    <script is:inline type="module" src={codeScriptUrl}></script>
     {site.chatEnabled ? <script is:inline type="module" src={chatScriptUrl}></script> : null}
   </body>
 </html>
