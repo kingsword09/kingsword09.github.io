@@ -1,0 +1,74 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import { site } from "../config/site";
+import { formatPostDate } from "../utils/dates";
+import { getPostUrl, sortPostsDesc } from "../utils/posts";
+import { withBase } from "../utils/urls";
+
+const posts = sortPostsDesc(await getCollection("posts"));
+---
+
+<BaseLayout>
+  <section id="intro">
+    <div class="flex-row-between">
+      <h1>{site.greetings}</h1>
+      <ThemeToggle />
+    </div>
+    <div class="bio">
+      {site.description}
+      <p>
+        <a href={withBase("/about/")}>{"\u003E"} About me</a>
+      </p>
+    </div>
+  </section>
+
+  <div class="search-article">
+    <label for="search-input" aria-hidden="true">
+      <!-- Magnifier -->
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="rgba(128,128,128,0.8)"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="feather feather-search"
+      >
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+    </label>
+
+    <input type="search" id="search-input" placeholder="Find some articles here" aria-label="Search" />
+    <ul id="search-results"></ul>
+  </div>
+
+  <section class="posts" id="Blog">
+    <h2>BLOG</h2>
+    <ul>
+      {posts.map((post) => (
+        <li>
+          <a href={getPostUrl(post)}>{post.data.title}</a>
+          <time datetime={post.data.pubDate.toISOString()}>{formatPostDate(post.data.pubDate)}</time>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  {/* Inline search index: avoids extra network request and keeps search fast. */}
+  <script is:inline type="application/json" id="search-index">
+    {JSON.stringify(
+      posts.map((post) => ({
+        title: post.data.title,
+        description: post.data.description ?? "",
+        tags: post.data.tags,
+        url: getPostUrl(post),
+      }))
+    )}
+  </script>
+</BaseLayout>

@@ -1,0 +1,49 @@
+---
+import { site } from "../config/site";
+import { withBase } from "../utils/urls";
+
+const rssUrl = withBase("/atom.xml");
+const codeUrl = site.repo;
+---
+
+<footer class="social-footer">
+  <div class="social-footer-icons">
+    {site.author.github ? (
+      <a
+        href={`https://github.com/${site.author.github}`}
+        title="Github profile"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <i class="fa-brands fa-github" aria-hidden="true"></i>
+      </a>
+    ) : null}
+
+    {site.author.twitter ? (
+      <a
+        href={`https://x.com/${site.author.twitter}`}
+        title="Twitter"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <i class="fa-brands fa-twitter" aria-hidden="true"></i>
+      </a>
+    ) : null}
+
+    <a
+      href={rssUrl}
+      title="Feed RSS"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <i class="fa-solid fa-rss" aria-hidden="true"></i>
+    </a>
+
+    {codeUrl ? (
+      <a href={codeUrl} title="Browse the code" target="_blank" rel="noopener noreferrer">
+        <i class="fa-solid fa-code" aria-hidden="true"></i>
+      </a>
+    ) : null}
+  </div>
+</footer>
+

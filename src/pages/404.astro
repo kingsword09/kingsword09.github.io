@@ -1,0 +1,26 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../config/site";
+import { withBase } from "../utils/urls";
+---
+
+<BaseLayout title="404: Page not found">
+  <div class="flex-row-between">
+    <a href={withBase("/")}>
+      <i class="fa fa-home" aria-hidden="true"></i> Home
+    </a>
+  </div>
+  <p>
+    😕 Whoops! I've misplaced that URL or it's pointing to something that doesn't exist. If you think this is an error,
+    please open an{" "}
+    <a
+      href={`https://github.com/${site.author.github || "kingsword09"}/kingsword09.github.io/issues/new`}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      issue
+    </a>
+    .
+  </p>
+</BaseLayout>
+

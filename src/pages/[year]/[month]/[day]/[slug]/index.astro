@@ -1,0 +1,72 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../../../layouts/BaseLayout.astro";
+import ThemeToggle from "../../../../../components/ThemeToggle.astro";
+import { formatPostDate, getYmdParts } from "../../../../../utils/dates";
+import { getPostUrl, sortPostsDesc } from "../../../../../utils/posts";
+import { withBase } from "../../../../../utils/urls";
+
+export async function getStaticPaths() {
+  const posts = sortPostsDesc(await getCollection("posts"));
+  return posts.map((post) => {
+    const { year, month, day } = getYmdParts(post.data.pubDate);
+    return {
+      params: { year, month, day, slug: post.slug },
+      props: { slug: post.slug },
+    };
+  });
+}
+
+const posts = sortPostsDesc(await getCollection("posts"));
+const current = posts.find((p) => p.slug === Astro.props.slug);
+if (!current) throw new Error(`Post not found: ${Astro.props.slug}`);
+
+const index = posts.findIndex((p) => p.slug === current.slug);
+const previous = index > 0 ? posts[index - 1] : null; // newer (because list is newest-first)
+const next = index < posts.length - 1 ? posts[index + 1] : null; // older
+
+const { Content } = await current.render();
+---
+
+<BaseLayout title={current.data.title} description={current.data.description}>
+  <section class="post">
+    <div class="flex-row-between">
+      <a href={withBase("/")}>« back</a>
+      <ThemeToggle />
+    </div>
+
+    <time datetime={current.data.pubDate.toISOString()}>
+      {formatPostDate(current.data.pubDate)} - {current.data.minute ?? 1}' read
+    </time>
+
+    <h1 class="title">{current.data.title}</h1>
+
+    <span class="meta">
+      {current.data.tags.map((tag, i) => (
+        <>
+          <a href={withBase(`/tag/${tag}/`)}>{tag}</a>
+          {i < current.data.tags.length - 1 ? ", " : null}
+        </>
+      ))}
+    </span>
+
+    <Content />
+  </section>
+
+  <section>
+    <nav class="post-nav">
+      {previous ? (
+        <a class="post-nav-item post-nav-prev" href={getPostUrl(previous)}>
+          <div class="nav-arrow">Previous</div>
+          <span class="post-title">{previous.data.title}</span>
+        </a>
+      ) : null}
+      {next ? (
+        <a class="post-nav-item post-nav-next" href={getPostUrl(next)}>
+          <div class="nav-arrow">Next</div>
+          <span class="post-title">{next.data.title}</span>
+        </a>
+      ) : null}
+    </nav>
+  </section>
+</BaseLayout>
