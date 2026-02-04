@@ -1,0 +1,120 @@
+---
+import "../styles/main.scss";
+import "../styles/chat.scss";
+
+import { site } from "../config/site";
+import SocialFooter from "../components/SocialFooter.astro";
+import ChatWidget from "../components/ChatWidget.astro";
+import { withBase } from "../utils/urls";
+
+import themeScriptUrl from "../scripts/theme.ts?url";
+import searchScriptUrl from "../scripts/search.ts?url";
+import chatScriptUrl from "../scripts/chat.ts?url";
+
+type Props = {
+  title?: string;
+  description?: string;
+};
+
+const { title, description } = Astro.props;
+
+const pageTitle = title
+  ? `${title} - ${site.title}`
+  : `${site.title} - ${site.description}`;
+const metaDescription = description ?? site.description;
+const canonicalUrl = new URL(Astro.url.pathname, site.url).toString();
+---
+
+<!doctype html>
+<html lang={site.lang} data-theme={site.defaultTheme}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={metaDescription} />
+
+    <!-- Prevent theme flash: apply stored/preferred theme before styles render -->
+    <script is:inline>
+      {`(function () {
+  try {
+    var stored = localStorage.getItem("theme");
+    if (stored === "dark" || stored === "light") {
+      document.documentElement.setAttribute("data-theme", stored);
+      return;
+    }
+    if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+  } catch (_) {}
+})();`}
+    </script>
+
+    {site.chromeOriginTrialToken ? (
+      <meta http-equiv="origin-trial" content={site.chromeOriginTrialToken} />
+    ) : null}
+
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <title>{pageTitle}</title>
+    <link rel="canonical" href={canonicalUrl} />
+
+    <link rel="shortcut icon" href={withBase("/favicon.png")} />
+    <link
+      rel="alternate"
+      type="application/atom+xml"
+      title={site.title}
+      href={withBase("/atom.xml")}
+    />
+    <link
+      rel="alternate"
+      type="application/json"
+      title={site.title}
+      href={withBase("/feed.json")}
+    />
+    <link rel="sitemap" type="application/xml" title="sitemap" href={withBase("/sitemap.xml")} />
+
+    {site.googleWebFonts ? (
+      <>
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          href={`https://fonts.googleapis.com/css2?${site.googleWebFonts}&display=swap`}
+          rel="stylesheet"
+        />
+      </>
+    ) : null}
+
+    {site.gaMeasurementId ? (
+      <>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${site.gaMeasurementId}`}></script>
+        <script is:inline>
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${site.gaMeasurementId}');`}
+        </script>
+      </>
+    ) : null}
+
+  </head>
+
+  <body>
+    <main>
+      <slot />
+    </main>
+
+    {site.chatEnabled ? <ChatWidget /> : null}
+    <SocialFooter />
+
+    <script is:inline type="module" src={themeScriptUrl}></script>
+    <script is:inline type="module" src={searchScriptUrl}></script>
+    {site.chatEnabled ? <script is:inline type="module" src={chatScriptUrl}></script> : null}
+  </body>
+</html>

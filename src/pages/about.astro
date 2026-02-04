@@ -1,0 +1,226 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import { withBase } from "../utils/urls";
+import { site } from "../config/site";
+import githubCacheRaw from "../data/github.json";
+import type { GitHubContributedRepo, GitHubRepo, GitHubUser } from "../utils/github";
+
+type GitHubCache = {
+  generatedAt: string | null;
+  user: GitHubUser | null;
+  recent: GitHubRepo[];
+  contributed: GitHubContributedRepo[];
+};
+
+const githubCache = githubCacheRaw as unknown as GitHubCache;
+
+const ghUser = githubCache.user;
+const recentRepos = githubCache.recent ?? [];
+const contributedReposRaw = githubCache.contributed ?? [];
+const contributedRepos = contributedReposRaw
+  .filter((repo) => (repo.pr_count ?? 0) > 0)
+  .slice()
+  .sort(
+    (a, b) =>
+      (b.pr_count ?? 0) - (a.pr_count ?? 0) ||
+      b.stargazers_count - a.stargazers_count ||
+      a.full_name.localeCompare(b.full_name)
+  );
+
+const displayName = ghUser?.name || site.author.name;
+const login = ghUser?.login || site.author.username;
+const bio = ghUser?.bio || site.author.bio || site.description;
+const avatarUrl = ghUser?.avatar_url || site.author.avatarUrl;
+---
+
+<BaseLayout title="About">
+  <section class="post about">
+    <div class="flex-row-between">
+      <a href={withBase("/")}>« Home</a>
+      <ThemeToggle />
+    </div>
+
+    <div class="about-header">
+      <img
+        class="about-avatar"
+        src={avatarUrl}
+        alt={`${displayName} avatar`}
+        width="96"
+        height="96"
+        loading="lazy"
+        decoding="async"
+        referrerpolicy="no-referrer"
+      />
+
+      <div class="about-body">
+        <h1 class="title">{displayName}</h1>
+        {login ? <p class="about-handle">@{login}</p> : null}
+        {bio ? <p class="about-bio">{bio}</p> : null}
+
+        <ul class="about-meta">
+          {ghUser ? (
+            <li>
+              <span class="k">Statistics</span>
+              <span>
+                {ghUser.followers} followers · {ghUser.following} following · {ghUser.public_repos} repos
+              </span>
+            </li>
+          ) : null}
+        </ul>
+      </div>
+    </div>
+
+    {recentRepos.length ? (
+      <>
+        <h2>Recent</h2>
+        <ul class="repo-list">
+          {recentRepos.map((repo) => (
+            <li class="repo-row">
+              <a class="repo-name" href={repo.html_url} target="_blank" rel="noopener noreferrer">
+                {repo.name}
+              </a>
+              <div class="repo-meta">
+                {repo.language ? <span class="chip">{repo.language}</span> : null}
+                <span class="chip">★ {repo.stargazers_count}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </>
+    ) : null}
+
+    {contributedRepos.length ? (
+      <>
+        <h2>Contributed</h2>
+        <ul class="repo-list">
+          {contributedRepos.map((repo) => (
+            <li class="repo-row">
+              <a class="repo-name" href={repo.html_url} target="_blank" rel="noopener noreferrer">
+                {repo.full_name}
+              </a>
+              <div class="repo-meta">
+                {repo.language ? <span class="chip">{repo.language}</span> : null}
+                <span class="chip">{repo.pr_count} PRs</span>
+                <span class="chip">★ {repo.stargazers_count}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </>
+    ) : null}
+  </section>
+</BaseLayout>
+
+<style>
+  .about-header {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+    margin-top: 2rem;
+  }
+
+  .about-avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    flex: 0 0 auto;
+  }
+
+  :global(html[data-theme="dark"]) .about-avatar {
+    border-color: rgba(255, 255, 255, 0.16);
+  }
+
+  .about-handle {
+    opacity: 0.8;
+    margin-top: -0.75rem;
+  }
+
+  .about-meta,
+  .repo-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.75rem 0 0;
+  }
+
+  .about-meta li {
+    display: flex;
+    gap: 0.75rem;
+    align-items: baseline;
+  }
+
+  .about-meta .k {
+    min-width: 4.5rem;
+    opacity: 0.75;
+  }
+
+  .repo-list {
+    margin: 0.5rem 0 1.25rem;
+  }
+
+  .repo-list:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .repo-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  :global(html[data-theme="dark"]) .repo-row {
+    border-bottom-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .repo-name {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 700;
+    min-width: 0;
+  }
+
+  .repo-meta {
+    display: flex;
+    gap: 0.35rem;
+    align-items: baseline;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+    opacity: 0.8;
+  }
+
+  .chip {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 999px;
+    padding: 0.02rem 0.45rem;
+  }
+
+  :global(html[data-theme="dark"]) .chip {
+    border-color: rgba(255, 255, 255, 0.14);
+  }
+
+  @media (max-width: 640px) {
+    .about-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .repo-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.4rem;
+    }
+
+    .repo-meta {
+      justify-content: flex-start;
+    }
+  }
+</style>
