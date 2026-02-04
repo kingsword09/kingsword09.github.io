@@ -180,36 +180,73 @@ a {
 
 }
 
-code,
-pre {
-	background: var(--code-bg-color);
-	margin: 0 -27px;
-	border-width: 1px;
-}
-
 code {
 	font-family: var(--source-code-font), monospace;
-	margin: unset;
-	padding: 0.1rem;
+	background: var(--code-bg-color);
+	padding: 0.1rem 0.3rem;
+	border-radius: 6px;
 	color: var(--highlight-text-color);
 }
 
 pre code {
 	background-color: unset;
 	color: unset;
+	padding: 0;
+	border-radius: 0;
 }
 
 pre {
-	border-width: 3px;
-	padding: 0.8rem;
-	white-space: pre-wrap;
-	border-style: none none none solid;
-	border-color: var(--light-text-color);
+	background: var(--code-bg-color);
+	margin: 1.25rem 0;
+	padding: 1rem;
+	white-space: pre;
+	overflow-x: auto;
+	scrollbar-width: thin;
+	scrollbar-color: rgba(89, 183, 255, 0.35) transparent;
+	border-style: solid;
+	border-width: 1px 1px 1px 4px;
+	border-color: rgba(0, 0, 0, 0.08);
+	border-left-color: var(--light-text-color);
+	border-radius: 12px;
+}
+
+html[data-theme="dark"] pre {
+	border-color: rgba(255, 255, 255, 0.12);
+	border-left-color: var(--light-text-color);
+	scrollbar-color: rgba(196, 187, 240, 0.35) transparent;
+}
+
+pre::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+pre::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+pre::-webkit-scrollbar-thumb {
+	background-color: rgba(89, 183, 255, 0.35);
+	border-radius: 999px;
+	border: 3px solid transparent;
+	background-clip: padding-box;
+}
+
+html[data-theme="dark"] pre::-webkit-scrollbar-thumb {
+	background-color: rgba(196, 187, 240, 0.35);
+}
+
+pre::-webkit-scrollbar-thumb:hover {
+	background-color: rgba(89, 183, 255, 0.55);
+}
+
+html[data-theme="dark"] pre::-webkit-scrollbar-thumb:hover {
+	background-color: rgba(196, 187, 240, 0.55);
 }
 
 /* Build-time code highlighting (rehype-pretty-code + Shiki) */
 figure[data-rehype-pretty-code-figure] {
-	margin: 0 -27px;
+	margin: 1.25rem 0;
 	position: relative;
 }
 
@@ -217,6 +254,13 @@ figure[data-rehype-pretty-code-figure] pre {
 	margin: 0;
 	white-space: pre;
 	overflow-x: auto;
+	background-color: var(--code-bg-color);
+	border-style: solid;
+	border-width: 1px 1px 1px 4px;
+	border-color: rgba(0, 0, 0, 0.08);
+	border-left-color: var(--light-text-color);
+	border-radius: 12px;
+	padding: 2.6rem 1rem 1rem;
 }
 
 figure[data-rehype-pretty-code-figure] code {
@@ -224,12 +268,31 @@ figure[data-rehype-pretty-code-figure] code {
 }
 
 html[data-theme="dark"] figure[data-rehype-pretty-code-figure] pre {
-	background-color: var(--shiki-dark-bg);
+	border-color: rgba(255, 255, 255, 0.12);
+	border-left-color: var(--light-text-color);
+}
+
+figure[data-rehype-pretty-code-figure] pre:focus-visible {
+	outline: 2px solid var(--light-text-color);
+	outline-offset: 2px;
+}
+
+figure[data-rehype-pretty-code-figure] pre[data-language]::before {
+	content: attr(data-language);
+	position: absolute;
+	top: 10px;
+	left: 14px;
+	font-size: 12px;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	opacity: 0.75;
+}
+
+html[data-theme="dark"] figure[data-rehype-pretty-code-figure] pre {
 	color: var(--shiki-dark);
 }
 
 html[data-theme="light"] figure[data-rehype-pretty-code-figure] pre {
-	background-color: var(--shiki-light-bg);
 	color: var(--shiki-light);
 }
 
@@ -246,11 +309,11 @@ html[data-theme="light"] figure[data-rehype-pretty-code-figure] pre span {
 }
 
 .code-line--highlighted {
-	background: rgba(0, 0, 0, 0.08);
+	background: rgba(89, 183, 255, 0.12);
 }
 
 html[data-theme="dark"] .code-line--highlighted {
-	background: rgba(255, 255, 255, 0.06);
+	background: rgba(196, 187, 240, 0.14);
 }
 
 .code-copy-button {
@@ -266,12 +329,23 @@ html[data-theme="dark"] .code-line--highlighted {
 	color: #111827;
 	cursor: pointer;
 	backdrop-filter: blur(6px);
+	opacity: 0;
+	pointer-events: none;
+	transform: translateY(-2px);
+	transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 html[data-theme="dark"] .code-copy-button {
 	border-color: rgba(255, 255, 255, 0.12);
 	background: rgba(17, 24, 39, 0.65);
 	color: #e5e7eb;
+}
+
+figure[data-rehype-pretty-code-figure]:hover .code-copy-button,
+figure[data-rehype-pretty-code-figure]:focus-within .code-copy-button {
+	opacity: 1;
+	pointer-events: auto;
+	transform: translateY(0);
 }
 
 .code-copy-button:hover {
