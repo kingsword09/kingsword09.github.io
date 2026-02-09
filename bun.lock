@@ -5,20 +5,20 @@
     "": {
       "name": "kingsword09.github.io",
       "dependencies": {
-        "astro": "latest",
-        "dompurify": "latest",
-        "marked": "latest",
-        "prismjs": "latest",
+        "astro": "^5.17.1",
+        "dompurify": "^3.3.1",
+        "marked": "^17.0.1",
+        "prismjs": "^1.30.0",
       },
       "devDependencies": {
-        "@astrojs/check": "latest",
-        "@types/node": "latest",
-        "rehype-autolink-headings": "latest",
-        "rehype-pretty-code": "latest",
-        "rehype-slug": "latest",
-        "remark-gfm": "latest",
-        "sass": "latest",
-        "typescript": "latest",
+        "@astrojs/check": "^0.9.6",
+        "@types/node": "^25.2.2",
+        "rehype-autolink-headings": "^7.1.0",
+        "rehype-pretty-code": "^0.14.1",
+        "rehype-slug": "^6.0.0",
+        "remark-gfm": "^4.0.1",
+        "sass": "^1.97.3",
+        "typescript": "^5.9.3",
       },
     },
   },
@@ -277,7 +277,7 @@
 
     "@types/nlcst": ["@types/nlcst@2.0.3", "", { "dependencies": { "@types/unist": "*" } }, "sha512-vSYNSDe6Ix3q+6Z7ri9lyWqgGhJTmzRjZRqyq15N0Z/1/UnVsno9G/N40NBijoYx2seFDIl0+B2mgAb9mezUCA=="],
 
-    "@types/node": ["@types/node@25.2.0", "", { "dependencies": { "undici-types": "~7.16.0" } }, "sha512-DZ8VwRFUNzuqJ5khrvwMXHmvPe+zGayJhr2CDNiKB1WBE1ST8Djl00D0IC4vvNmHMdj6DlbYRIaFE7WHjlDl5w=="],
+    "@types/node": ["@types/node@25.2.2", "", { "dependencies": { "undici-types": "~7.16.0" } }, "sha512-BkmoP5/FhRYek5izySdkOneRyXYN35I860MFAGupTdebyE66uZaR+bXLHq8k4DirE5DwQi3NuhvRU1jqTVwUrQ=="],
 
     "@types/trusted-types": ["@types/trusted-types@2.0.7", "", {}, "sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw=="],
 
