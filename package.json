@@ -13,7 +13,7 @@
   "dependencies": {
     "astro": "^6.0.8",
     "dompurify": "^3.3.3",
-    "marked": "^17.0.5",
+    "marked": "^17.0.6",
     "prismjs": "^1.30.0"
   },
   "devDependencies": {
