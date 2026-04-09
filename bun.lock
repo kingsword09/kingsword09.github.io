@@ -17,7 +17,7 @@
         "rehype-pretty-code": "^0.14.3",
         "rehype-slug": "^6.0.0",
         "remark-gfm": "^4.0.1",
-        "sass": "^1.98.0",
+        "sass": "^1.99.0",
         "typescript": "^6.0.2",
       },
     },
@@ -707,7 +707,7 @@
 
     "rollup": ["rollup@4.57.1", "", { "dependencies": { "@types/estree": "1.0.8" }, "optionalDependencies": { "@rollup/rollup-android-arm-eabi": "4.57.1", "@rollup/rollup-android-arm64": "4.57.1", "@rollup/rollup-darwin-arm64": "4.57.1", "@rollup/rollup-darwin-x64": "4.57.1", "@rollup/rollup-freebsd-arm64": "4.57.1", "@rollup/rollup-freebsd-x64": "4.57.1", "@rollup/rollup-linux-arm-gnueabihf": "4.57.1", "@rollup/rollup-linux-arm-musleabihf": "4.57.1", "@rollup/rollup-linux-arm64-gnu": "4.57.1", "@rollup/rollup-linux-arm64-musl": "4.57.1", "@rollup/rollup-linux-loong64-gnu": "4.57.1", "@rollup/rollup-linux-loong64-musl": "4.57.1", "@rollup/rollup-linux-ppc64-gnu": "4.57.1", "@rollup/rollup-linux-ppc64-musl": "4.57.1", "@rollup/rollup-linux-riscv64-gnu": "4.57.1", "@rollup/rollup-linux-riscv64-musl": "4.57.1", "@rollup/rollup-linux-s390x-gnu": "4.57.1", "@rollup/rollup-linux-x64-gnu": "4.57.1", "@rollup/rollup-linux-x64-musl": "4.57.1", "@rollup/rollup-openbsd-x64": "4.57.1", "@rollup/rollup-openharmony-arm64": "4.57.1", "@rollup/rollup-win32-arm64-msvc": "4.57.1", "@rollup/rollup-win32-ia32-msvc": "4.57.1", "@rollup/rollup-win32-x64-gnu": "4.57.1", "@rollup/rollup-win32-x64-msvc": "4.57.1", "fsevents": "~2.3.2" }, "bin": { "rollup": "dist/bin/rollup" } }, "sha512-oQL6lgK3e2QZeQ7gcgIkS2YZPg5slw37hYufJ3edKlfQSGGm8ICoxswK15ntSzF/a8+h7ekRy7k7oWc3BQ7y8A=="],
 
-    "sass": ["sass@1.98.0", "", { "dependencies": { "chokidar": "^4.0.0", "immutable": "^5.1.5", "source-map-js": ">=0.6.2 <2.0.0" }, "optionalDependencies": { "@parcel/watcher": "^2.4.1" }, "bin": { "sass": "sass.js" } }, "sha512-+4N/u9dZ4PrgzGgPlKnaaRQx64RO0JBKs9sDhQ2pLgN6JQZ25uPQZKQYaBJU48Kd5BxgXoJ4e09Dq7nMcOUW3A=="],
+    "sass": ["sass@1.99.0", "", { "dependencies": { "chokidar": "^4.0.0", "immutable": "^5.1.5", "source-map-js": ">=0.6.2 <2.0.0" }, "optionalDependencies": { "@parcel/watcher": "^2.4.1" }, "bin": { "sass": "sass.js" } }, "sha512-kgW13M54DUB7IsIRM5LvJkNlpH+WhMpooUcaWGFARkF1Tc82v9mIWkCbCYf+MBvpIUBSeSOTilpZjEPr2VYE6Q=="],
 
     "sax": ["sax@1.6.0", "", {}, "sha512-6R3J5M4AcbtLUdZmRv2SygeVaM7IhrLXu9BmnOGmmACak8fiUtOsYNWUS4uK7upbmHIBbLBeFeI//477BKLBzA=="],
 
