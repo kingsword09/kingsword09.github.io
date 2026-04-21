@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "astro": "^6.1.5",
-    "dompurify": "^3.3.3",
+    "dompurify": "^3.4.0",
     "marked": "^18.0.0",
     "prismjs": "^1.30.0"
   },
