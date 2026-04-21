@@ -11,7 +11,7 @@
     "sync:github": "bun run scripts/sync-github.ts"
   },
   "dependencies": {
-    "astro": "^6.1.5",
+    "astro": "^6.1.8",
     "dompurify": "^3.4.0",
     "marked": "^18.0.0",
     "prismjs": "^1.30.0"
