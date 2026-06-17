@@ -1,31 +1,32 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import BaseLayout from "../../../../../layouts/BaseLayout.astro";
 import ThemeToggle from "../../../../../components/ThemeToggle.astro";
 import { formatPostDate, getYmdParts } from "../../../../../utils/dates";
-import { getPostUrl, sortPostsDesc } from "../../../../../utils/posts";
+import { getPostSlug, getPostUrl, sortPostsDesc } from "../../../../../utils/posts";
 import { withBase } from "../../../../../utils/urls";
 
 export async function getStaticPaths() {
   const posts = sortPostsDesc(await getCollection("posts"));
   return posts.map((post) => {
     const { year, month, day } = getYmdParts(post.data.pubDate);
+    const slug = getPostSlug(post);
     return {
-      params: { year, month, day, slug: post.slug },
-      props: { slug: post.slug },
+      params: { year, month, day, slug },
+      props: { slug },
     };
   });
 }
 
 const posts = sortPostsDesc(await getCollection("posts"));
-const current = posts.find((p) => p.slug === Astro.props.slug);
+const current = posts.find((p) => getPostSlug(p) === Astro.props.slug);
 if (!current) throw new Error(`Post not found: ${Astro.props.slug}`);
 
-const index = posts.findIndex((p) => p.slug === current.slug);
+const index = posts.findIndex((p) => getPostSlug(p) === getPostSlug(current));
 const previous = index < posts.length - 1 ? posts[index + 1] : null; // older (previous post by date)
 const next = index > 0 ? posts[index - 1] : null; // newer (next post by date)
 
-const { Content } = await current.render();
+const { Content } = await render(current);
 ---
 
 <BaseLayout title={current.data.title} description={current.data.description}>

@@ -14,7 +14,9 @@ export const GET: APIRoute = async () => {
     parts.push("");
     parts.push(`# ${post.data.title}`);
     parts.push("");
-    parts.push(post.body.trim());
+    if (post.body) {
+      parts.push(post.body.trim());
+    }
     parts.push("");
     parts.push("--- END OF POST ---");
   }
