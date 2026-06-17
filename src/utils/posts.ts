@@ -9,9 +9,16 @@ const slugCollator = new Intl.Collator(undefined, {
   sensitivity: "base",
 });
 
+/**
+ * Get the slug from a post entry (id without extension)
+ */
+export function getPostSlug(post: PostEntry): string {
+  return post.id.replace(/\.(md|mdx)$/, "");
+}
+
 export function getPostPath(post: PostEntry): string {
   const { year, month, day } = getYmdParts(post.data.pubDate);
-  return `/${year}/${month}/${day}/${post.slug}/`;
+  return `/${year}/${month}/${day}/${getPostSlug(post)}/`;
 }
 
 export function getPostUrl(post: PostEntry): string {
@@ -24,6 +31,6 @@ export function sortPostsDesc(posts: PostEntry[]): PostEntry[] {
     if (byDate !== 0) return byDate;
 
     // Stable tie-break: newer-ish slugs first (e.g. "-2" before "-1")
-    return slugCollator.compare(b.slug, a.slug);
+    return slugCollator.compare(getPostSlug(b), getPostSlug(a));
   });
 }
